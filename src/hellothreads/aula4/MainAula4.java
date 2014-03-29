@@ -1,13 +1,30 @@
 package hellothreads.aula4;
 
+import hellothreads.aula4.emissaoBilhetes.Bilheteria;
+import hellothreads.aula4.emissaoBilhetes.Comprador;
+import hellothreads.aula4.emissaoBilhetes.Distribuidor;
 import hellothreads.aula4.primo.Concorrencia;
 import hellothreads.aula4.primo.Primator;
 
-import javax.swing.JOptionPane;
-
-public class Exercicio1 {
+public class MainAula4 {
 	
 	public static void main(String[] args) {
+		//listaNumerosPrimos();
+
+		Bilheteria bilheteria = new Bilheteria(); 
+		
+		Comprador comprador1 = new Comprador(bilheteria,"Comprador 1"); 
+		Comprador comprador2 = new Comprador(bilheteria,"Comprador 2"); 
+		
+		Distribuidor distribuidor = new Distribuidor(bilheteria); 
+		
+		distribuidor.start(); 
+		comprador1.start(); 
+		comprador2.start(); 
+	}
+
+	@SuppressWarnings("unused")
+	private static void listaNumerosPrimos() {
 		long tempoInicial = System.currentTimeMillis();
 		
 		Thread thread1 = new Thread(new Primator(0, 10000));
@@ -54,7 +71,6 @@ public class Exercicio1 {
 		
 		System.out.println("Tempo de execução:");
 		System.out.println((tempoFinal - tempoInicial)/1000);
-		
 	}
 	
 	@SuppressWarnings("unused")
